@@ -1,0 +1,36 @@
+add 3,5 => 8
+add 3,-3 => 0 CF ZF
+add 3,-5 => fffffffe SF
+adc (CF=1) 0xFF,0 => 0 CF ZF
+adc (CF=1) 0xFF,1 => 1 CF
+adc (CF=1) 0xFF,0xFE => fe CF SF
+adc (CF=1) 0xFF,0xFF => ff CF SF
+sbb (CF=1) 0,0 => ff CF SF
+sbb (CF=1) 0,1 => fe CF SF
+sbb (CF=1) 0,0xFE => 1 CF
+sbb (CF=1) 0,0xFF => 0 CF ZF
+shr 3,0 => 3
+shr 3,1 => 1 CF
+shr 3,2 => 0 CF ZF
+shr 0x80000000,1 => 40000000 OF
+shr 0x80000000,2 => 20000000 OF
+shr 0x80000001,1 => 40000000 CF OF
+shr 0x80000001,2 => 20000000 OF
+sar 3,0 => 3
+sar 3,1 => 1 CF
+sar 3,2 => 0 CF ZF
+sar 0x80000000,1 => c0000000 SF
+sar 0x80000000,2 => e0000000 SF
+sar 0x80000001,1 => c0000000 CF SF
+sar 0x80000001,2 => e0000000 SF
+sar 0x80000002,1 => c0000001 SF
+sar 0x80000002,2 => e0000000 CF SF
+shl 3,0 => 3
+shl 3,1 => 6
+shl 3,2 => c
+shl 0x80000000,1 => 0 CF ZF OF
+shl 0x80000000,2 => 0 ZF OF
+shl 0xD0000001,1 => a0000002 CF SF
+shl 0xD0000001,2 => 40000004 CF
+shl 0xE0000002,1 => c0000004 CF SF
+shl 0xE0000002,2 => 80000008 CF SF

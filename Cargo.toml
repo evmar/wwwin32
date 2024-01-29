@@ -3,6 +3,7 @@ members = [
   "cli",
   "web/glue",
   "win32/derive",
+  "exe/ops-r",
 ]
 
 [workspace.dependencies]
