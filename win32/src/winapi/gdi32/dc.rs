@@ -37,6 +37,7 @@ pub struct DC {
     // per object type.
     pub brush: HGDIOBJ,
     pub pen: HGDIOBJ,
+    pub palette: HGDIOBJ,
 }
 
 impl DC {
@@ -48,6 +49,7 @@ impl DC {
             y: 0,
             brush: Default::default(),
             pen: Default::default(),
+            palette: Default::default(),
         }
     }
 
@@ -134,7 +136,8 @@ pub fn GetDeviceCaps(
         GetDeviceCapsArg::NUMCOLORS => -1i32 as u32, // true color
         GetDeviceCapsArg::HORZRES => 640,
         GetDeviceCapsArg::VERTRES => 480,
-        _ => unimplemented!(),
+        GetDeviceCapsArg::RASTERCAPS => 0x100, // RC_PALETTE
+        index => unimplemented!("GetDeviceCaps index={:?}", index),
     }
 }
 

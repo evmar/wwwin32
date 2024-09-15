@@ -1,4 +1,4 @@
-use super::{Brush, DCTarget, Pen, BITMAP, COLORREF, HDC};
+use super::{Brush, DCTarget, Palette, Pen, BITMAP, COLORREF, HDC};
 use crate::{
     winapi::{
         bitmap::{Bitmap, BitmapMono, BitmapRGBA32},
@@ -29,6 +29,7 @@ impl BitmapType {
 pub enum Object {
     Brush(Brush),
     Bitmap(BitmapType),
+    Palette(Palette),
     Pen(Pen),
 }
 
@@ -98,6 +99,7 @@ pub fn SelectObject(machine: &mut Machine, hdc: HDC, hGdiObj: HGDIOBJ) -> HGDIOB
             DCTarget::DirectDrawSurface(_) => todo!(),
         },
         Object::Brush(_) => std::mem::replace(&mut dc.brush, hGdiObj),
+        Object::Palette(_) => panic!("SelectObject called with a palette (use SelectPalette)"),
         Object::Pen(_) => std::mem::replace(&mut dc.pen, hGdiObj),
     }
 }
@@ -126,6 +128,7 @@ pub fn GetObjectA(machine: &mut Machine, handle: HGDIOBJ, bytes: u32, out: u32) 
             };
             bytes
         }
+        Object::Palette(_) => todo!(),
         Object::Pen(_) => todo!(),
     }
 }
