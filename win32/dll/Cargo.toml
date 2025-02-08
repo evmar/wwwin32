@@ -1,0 +1,22 @@
+[package]
+name = "dll"
+version = "0.1.0"
+build = "build.rs"
+edition = "2021"
+
+[workspace]
+resolver = "2"
+
+[[example]]
+name = "advapi32"
+crate-type = ["cdylib"]
+path = "advapi32.rs"
+
+[lib]
+path = "lib.rs"
+
+[profile.release]
+panic = "abort"
+# Disabling debug appears to do nothing on Windows :(
+debug = false
+strip = true
